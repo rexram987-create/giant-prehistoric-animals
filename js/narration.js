@@ -6,7 +6,7 @@ function normalizeNarrationText(value){
     .replace(/\(\s*\)/g,'').replace(/\s+/g,' ').trim();
 }
 function buildNarrationText(animal){
-  const sections = [animal.nameHe, animal.subHe,
+  const sections = [animal.nameHe, animal.subHe, 'אזור מחיה. ' + animal.habitatHe,
     'ממדים וגודל. ' + animal.sizeHe, 'משקל מוערך. ' + animal.weightHe,
     'תקופה גאולוגית. ' + animal.epochHe, 'תפוצה ותזונה. ' + animal.regionHe,
     'סקירה כללית. ' + animal.overview, 'אנטומיה וממדים. ' + animal.anatomy,
@@ -98,7 +98,7 @@ function initializeNarration(){
   if(!pageNarrator.supported)narrationMessage='הדפדפן הזה אינו תומך בהקראה. אפשר לנסות לפתוח את האתר ב־Chrome או ב־Safari.';
   // Some engines populate their voice list asynchronously. The selected
   // Hebrew voice is resolved afresh for every utterance, including late voices.
-  window.speechSynthesis?.getVoices();
+  try { window.speechSynthesis?.getVoices?.(); } catch (_) { /* A voice service failure must not block the encyclopedia. */ }
   window.addEventListener('pagehide',stopNarration);
 }
 function renderNarrationControls(){
@@ -118,11 +118,14 @@ function syncNarrationUI(){
   const play=document.getElementById('narrationPlay');
   if(!play)return;
   const status=pageNarrator?.status || 'idle';
+  const previousFocus=document.activeElement;
   play.disabled=!pageNarrator?.supported || status!=='idle';
   document.getElementById('narrationPause').disabled=status==='idle';
   document.getElementById('narrationPause').textContent=status==='paused'?'המשך':'השהה';
   document.getElementById('narrationStop').disabled=status==='idle';
   document.getElementById('narrationStatus').textContent=narrationMessage;
+  if(previousFocus===play && status==='speaking')document.getElementById('narrationPause').focus();
+  else if(status==='idle' && ['narrationPause','narrationStop'].includes(previousFocus?.id))play.focus();
 }
 function startNarration(){
   const animal=ANIMALS.find(a=>a.id===state.animalId);
