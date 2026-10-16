@@ -1,19 +1,18 @@
 document.getElementById('openMenuBtn').onclick = () => toggleDrawer(true);
 document.getElementById('closeMenuBtn').onclick = () => toggleDrawer(false);
 backdropEl.onclick = () => toggleDrawer(false);
-document.getElementById('homeTitleBtn').onclick = selectIntro;
+document.getElementById('skipContentLink').onclick = event => { event.preventDefault(); mainEl.focus(); };
 document.getElementById('navIntroBtn').onclick = selectIntro;
-
-document.getElementById('toggleModeBtn').onclick = (e) => {
+document.getElementById('retryLoadBtn').onclick = initializeData;
+document.addEventListener('keydown', event => { handleDrawerKeydown(event); handleTabKeydown(event); });
+window.addEventListener('hashchange', () => applyRoute());
+document.getElementById('toggleModeBtn').onclick = () => {
   state.separated = !state.separated;
-  e.target.textContent = state.separated ? 'מצב תצוגה: מופרד ללשוניות' : 'מצב תצוגה: עמוד מלא רציף';
-  renderMain();
+  savePreferences(); syncPreferences(); renderMain();
 };
-
-document.getElementById('toggleLatinBtn').onclick = (e) => {
+document.getElementById('toggleLatinBtn').onclick = () => {
   state.showLatin = !state.showLatin;
-  document.body.classList.toggle('hide-latin', !state.showLatin);
-  e.target.textContent = state.showLatin ? 'מונחים לטיניים: מוצגים' : 'מונחים לטיניים: מוסתרים';
+  savePreferences(); syncPreferences();
 };
-
+syncPreferences();
 initializeData();

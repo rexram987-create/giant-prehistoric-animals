@@ -4,15 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Giant Prehistoric Animals | ענקי הפרהיסטוריה שאחרי הדינוזאורים</title>
+<meta name="description" content="אנציקלופדיה בעברית על תשעה ענקי פרהיסטוריה: ממדים, היסטוריית גילוי, מאובנים ומקורות. זמינה להתקנה ולקריאה ללא אינטרנט.">
+<meta name="theme-color" content="#111827">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" type="image/png" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
 <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-<header class="site-header">
+<a id="skipContentLink" class="skip-link" href="#mainContent">דלג לתוכן</a>
+<header id="siteHeader" class="site-header">
   <div class="header-inner">
     <div class="brand-group">
       <button id="openMenuBtn" class="btn-amber" aria-controls="drawer" aria-expanded="false">☰ תפריט יצורים</button>
-      <div id="homeTitleBtn" style="cursor:pointer">
-        <h1 class="brand-title">ענקי הפרהיסטוריה <span class="latin">(Giant Prehistoric Animals)</span></h1>
+      <div>
+        <h1 class="brand-title"><a id="homeTitleBtn" href="#intro" aria-label="ענקי הפרהיסטוריה — דף הבית">ענקי הפרהיסטוריה <span class="latin">(Giant Prehistoric Animals)</span></a></h1>
         <p class="brand-sub">היצורים הגדולים ביותר שחיו ביבשה, בים ובאוויר לאחר הכחדת הדינוזאורים</p>
       </div>
     </div>
@@ -24,13 +30,13 @@
 </header>
 
 <div id="backdrop" class="backdrop"></div>
-<aside id="drawer" class="drawer" aria-hidden="true" inert>
+<aside id="drawer" class="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" aria-hidden="true" hidden inert>
   <div class="drawer-head">
     <div>
-      <div style="font-weight:800;font-size:17px">ניווט לפי אזורי מחיה</div>
+      <div id="drawerTitle" style="font-weight:800;font-size:17px">ניווט לפי אזורי מחיה</div>
       <div style="font-size:12px;color:#94a3b8">בחר דף בעל חיים נפרד</div>
     </div>
-    <button id="closeMenuBtn" class="btn-sec">✕</button>
+    <button id="closeMenuBtn" class="btn-sec" aria-label="סגור תפריט">✕</button>
   </div>
   <div class="drawer-body">
     <button id="navIntroBtn" class="btn-amber" style="width:100%;justify-content:space-between;margin-bottom:14px">
@@ -40,9 +46,16 @@
   </div>
 </aside>
 
-<main id="mainContent"></main>
+<div id="loadingNotice" class="notice"><p id="loadStatus" role="status" aria-live="polite"></p><button id="retryLoadBtn" class="btn-sec" hidden>נסה לטעון שוב</button></div>
+<main id="mainContent" tabindex="-1" aria-busy="true"></main>
+<section id="siteTools" class="site-tools" aria-label="התקנה וזמינות ללא אינטרנט">
+  <button id="installBtn" class="btn-amber" hidden>התקן בטלפון</button>
+  <details id="installHelp"><summary>איך מתקינים את האתר?</summary><p>ב־Chrome באנדרואיד: פתחו את תפריט שלוש הנקודות ובחרו „התקנת אפליקציה” או „הוספה למסך הבית”. ב־iPhone: פתחו ב־Safari, לחצו על שיתוף ובחרו „הוסף למסך הבית”. אם כבר התקנתם, פתחו דרך הסמל במסך הבית.</p></details>
+  <p id="offlineStatus" role="status" aria-live="polite">מכין את התוכן לקריאה ללא אינטרנט…</p>
+  <button id="updateBtn" class="btn-sec" hidden>גרסה חדשה זמינה — עדכן</button>
+</section>
 
-<footer>
+<footer id="siteFooter">
   <strong>Giant-Prehistoric-Animals</strong> — אנציקלופדיה אינטראקטיבית של ענקי עידן הקנוזואיקון (לאחר הכחדת הדינוזאורים)
 </footer>
 
@@ -50,5 +63,6 @@
 <script src="./js/navigation.js" defer></script>
 <script src="./js/render.js" defer></script>
 <script src="./js/events.js" defer></script>
+<script src="./js/pwa.js" defer></script>
 </body>
 </html>
