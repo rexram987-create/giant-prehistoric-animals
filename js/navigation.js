@@ -35,6 +35,7 @@ function renderDrawer(){
 }
 function applyRoute(focus = true){
   if (!ANIMALS.length) return;
+  stopNarration();
   const previousAnimal = state.animalId;
   const previousTab = state.tab;
   const match = /^#animal\/([a-z0-9-]+)(?:\/([a-z]+))?$/.exec(location.hash);

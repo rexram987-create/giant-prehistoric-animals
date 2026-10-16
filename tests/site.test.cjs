@@ -7,7 +7,7 @@ function app(hash=''){
  const els=new Map(); const get=id=>{if(!els.has(id))els.set(id,element());return els.get(id)};
  const location={hash,pathname:'/'};
  const context=vm.createContext({console:{error(){},warn(){}},URL,URLSearchParams,location,history:{replaceState(a,b,url){location.hash=url.startsWith('#')?url:''}},localStorage:{getItem(){return null},setItem(){}},document:{getElementById:get,body:element(),querySelectorAll(){return []},activeElement:null},window:{location,scrollTo(){},addEventListener(){}},fetch:async url=>{if(url.includes('habitats'))return {ok:true,json:async()=>[{id:'land'}]};if(url.includes('index'))return {ok:true,json:async()=>['good','bad']};return {ok:!url.includes('bad'),json:async()=>({id:'good',nameHe:'תקין'})}}});
- for(const name of ['app','navigation'])vm.runInContext(fs.readFileSync(`js/${name}.js`,'utf8'),context);
+ for(const name of ['app','navigation','narration'])vm.runInContext(fs.readFileSync(`js/${name}.js`,'utf8'),context);
  context.renderDrawer=()=>{};context.renderMain=()=>{};
  return {context,get,run:s=>vm.runInContext(s,context)};
 }
@@ -53,3 +53,4 @@ test('every animal page renders its local reconstruction with alt text and discl
  }
 });
 test('all nine images remain available offline',async()=>{const w=workerHarness();await w.install();for(const id of JSON.parse(fs.readFileSync('data/animals/index.json')))assert.equal(await w.request(`images/animals/${id}.webp`),`cached:./images/animals/${id}.webp`)});
+test('changing the animal route stops active narration before replacing the page',()=>{const a=app('#animal/good/overview');a.run("ANIMALS=[{id:'good'}];pageNarrator={status:'speaking',stop(){this.status='idle';this.stopped=true}};applyRoute(false)");assert.equal(a.run('pageNarrator.stopped'),true);assert.equal(a.run('pageNarrator.status'),'idle')});

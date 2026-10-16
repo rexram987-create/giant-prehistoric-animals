@@ -114,3 +114,14 @@ button,summary{min-height:44px}
 .animal-figure figcaption{font-size:13px;line-height:1.65;color:#cbd5e1;margin-top:10px}
 .image-hint{display:block;color:#fbbf24;margin-top:4px}
 @media(max-width:600px){.animal-figure{margin-top:16px}.animal-figure>a{border-radius:10px}}
+
+.narration{margin:18px 0;padding:16px;border:1px solid #374151;border-radius:14px;background:#0b0f17}
+.narration-buttons{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.narration-buttons button{min-height:44px}
+.narration button:disabled{opacity:0.55;cursor:default}
+.narration-rate{display:flex;align-items:center;gap:8px;font-size:14px;color:#cbd5e1}
+.narration select{font:inherit;min-height:44px;border-radius:8px;background:#1f2937;color:#f1f5f9;border:1px solid #64748b;padding:6px 10px}
+.narration select:focus-visible{outline:3px solid #fbbf24;outline-offset:3px}
+#narrationStatus{font-size:14px;margin:10px 0 0;color:#fbbf24}
+.narration .narration-note{font-size:12px;color:#cbd5e1;margin:6px 0 0}
+@media(max-width:600px){.narration{padding:12px}.narration-buttons>button:first-child{flex-basis:100%;justify-content:center}.narration-rate{flex-wrap:wrap}}
