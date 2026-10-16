@@ -40,3 +40,4 @@ function pwaHarness(controlled){
 }
 test('every already-controlled tab reloads after a service worker update',()=>{const p=pwaHarness(true);p.handlers.controllerchange();assert.equal(p.reloads,1)});
 test('first-time offline activation does not interrupt reading with a reload',()=>{const p=pwaHarness(false);p.serviceWorker.controller={};p.handlers.controllerchange();assert.equal(p.reloads,0);assert.match(p.get('offlineStatus').textContent,/נשמר/)});
+test('closed drawer is removed from layout, not just translated offscreen',()=>{const a=app();a.run('toggleDrawer(true)');assert.equal(a.get('drawer').hidden,false);a.run('toggleDrawer(false)');assert.equal(a.get('drawer').hidden,true)});

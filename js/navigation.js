@@ -4,6 +4,7 @@ let drawerReturnFocus = null;
 function toggleDrawer(open){
   const wasOpen = drawerEl.getAttribute('aria-hidden') === 'false';
   if (open && !wasOpen) drawerReturnFocus = document.activeElement;
+  drawerEl.hidden = !open;
   drawerEl.classList.toggle('open', open);
   backdropEl.classList.toggle('open', open);
   drawerEl.setAttribute('aria-hidden', String(!open));
