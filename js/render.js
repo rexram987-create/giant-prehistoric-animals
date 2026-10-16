@@ -33,7 +33,7 @@ function renderMain(){
       <button class="tab-btn ${state.tab==='overview'?'active':''}" onclick="setTab('overview')">סקירה כללית</button>
       <button class="tab-btn ${state.tab==='anatomy'?'active':''}" onclick="setTab('anatomy')">אנטומיה וממדים</button>
       <button class="tab-btn ${state.tab==='ecology'?'active':''}" onclick="setTab('ecology')">אקולוגיה והכחדה</button>
-      <button class="tab-btn ${state.tab==='discovery'?'active':''}" onclick="setTab('discovery')">גילוי מדעי</button>
+      <button class="tab-btn ${state.tab==='discovery'?'active':''}" onclick="setTab('discovery')">היסטוריית הגילוי ומאובנים</button>
     </div>
   ` : '';
 
@@ -43,7 +43,7 @@ function renderMain(){
       overview: {t:'סקירה כללית', c:a.overview},
       anatomy: {t:'אנטומיה, שלד והשוואת גודל', c:a.anatomy + '<br><br><strong>יחס לאדם:</strong> ' + a.ratio},
       ecology: {t:'אקולוגיה, תזונה והכחדה', c:a.ecology},
-      discovery: {t:'היסטוריית גילוי ותיעוד מאובנים', c:a.discovery}
+      discovery: {t:'היסטוריית הגילוי ושלמות המאובנים', c:`<strong>היסטוריית הגילוי</strong><br>${a.discoveryHistory || a.discovery}<br><br><strong>האם נמצאו שלד או גולגולת שלמים?</strong><br>${a.fossilCompleteness || 'אין מידע מאומת'}<br><br>${(a.researchSources || []).map(src => `<a href="${src.url}" target="_blank" rel="noopener noreferrer">מקור מדעי לקריאה נוספת ↗</a>`).join('<br>')}`}
     };
     const cur = map[state.tab];
     bodyHtml = `<div class="card"><h3 style="margin-top:0;color:#fbbf24">${cur.t}</h3><p style="font-size:17px;margin:0">${cur.c}</p></div>`;
@@ -52,7 +52,7 @@ function renderMain(){
       <div class="card"><h3 style="margin-top:0;color:#fbbf24">סקירה כללית</h3><p>${a.overview}</p></div>
       <div class="card"><h3 style="margin-top:0;color:#fbbf24">אנטומיה וממדים</h3><p>${a.anatomy}</p><p><strong>יחס לאדם:</strong> ${a.ratio}</p></div>
       <div class="card"><h3 style="margin-top:0;color:#fbbf24">אקולוגיה והכחדה</h3><p>${a.ecology}</p></div>
-      <div class="card"><h3 style="margin-top:0;color:#fbbf24">גילוי מדעי</h3><p>${a.discovery}</p></div>
+      <div class="card"><h3 style="margin-top:0;color:#fbbf24">היסטוריית הגילוי</h3><p>${a.discoveryHistory || a.discovery}</p><h3 style="color:#fbbf24">שלמות המאובנים</h3><p>${a.fossilCompleteness || "אין מידע מאומת"}</p><p>${(a.researchSources || []).map(src => `<a href="${src.url}" target="_blank" rel="noopener noreferrer">מקור מדעי לקריאה נוספת ↗</a>`).join("<br>")}</p></div>
     `;
   }
 
