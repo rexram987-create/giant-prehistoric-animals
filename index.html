@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ענקי הפרהיסטוריה שאחרי הדינוזאורים</title>
+  <style>
+    :root {
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+      --accent: #38bdf8;
+      --text: #f8fafc;
+      --subtext: #94a3b8;
+      --border: #334155;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+    body { background-color: var(--bg-color); color: var(--text); line-height: 1.6; }
+    
+    header {
+      position: relative;
+      background: #1e293b;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--border);
+    }
+    .header-title { font-size: 1.4rem; font-weight: bold; color: var(--accent); }
+    .header-controls { display: flex; gap: 10px; align-items: center; }
+    .btn {
+      background: #334155;
+      color: white;
+      border: 1px solid var(--accent);
+      padding: 8px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+    .btn:hover { background: var(--accent); color: #0f172a; }
+
+    .drawer-overlay {
+      position: fixed; top: 0; right: 0; bottom: 0; left: 0;
+      background: rgba(0,0,0,0.6); display: none; z-index: 100;
+    }
+    .drawer-overlay.active { display: block; }
+    .drawer {
+      position: fixed; top: 0; right: 0; width: 340px; height: 100%;
+      background: #1e293b; z-index: 101; padding: 20px; overflow-y: auto;
+      transform: translateX(100%); transition: transform 0.3s ease;
+      border-left: 1px solid var(--border);
+    }
+    .drawer.active { transform: translateX(0); }
+    .drawer-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .drawer-close { background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+    .category-title { color: var(--accent); margin-top: 15px; margin-bottom: 8px; font-size: 1.1rem; border-bottom: 1px solid var(--border); padding-bottom: 4px; }
+    .animal-link { display: block; color: var(--text); text-decoration: none; padding: 8px 12px; border-radius: 4px; margin-bottom: 4px; }
+    .animal-link:hover { background: #334155; }
+
+    .container { max-width: 900px; margin: 30px auto; padding: 0 20px; }
+    
+    .intro-card {
+      background: var(--card-bg); border-radius: 12px; padding: 30px; border: 1px solid var(--border);
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
+    }
+    .intro-card h1 { color: var(--accent); font-size: 2rem; margin-bottom: 15px; }
+    .intro-card p { margin-bottom: 15px; font-size: 1.1rem; color: #e2e8f0; }
+
+    .animal-view { display: none; }
+    .animal-view.active { display: block; }
+    
+    .view-title { font-size: 2rem; color: var(--accent); margin-bottom: 5px; }
+    .latin-name { font-style: italic; color: var(--subtext); margin-bottom: 20px; font-size: 1.2rem; display: block; }
+    .latin-hidden .latin-name, .latin-hidden .latin-term { display: none !important; }
+
+    .continuous-view .card { background: var(--card-bg); border-radius: 8px; padding: 20px; margin-bottom: 20px; border: 1px solid var(--border); }
+    
+    .tabs-nav { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid var(--border); }
+    .tab-btn { background: none; border: none; color: var(--subtext); padding: 10px 15px; cursor: pointer; font-size: 1rem; }
+    .tab-btn.active { color: var(--accent); border-bottom: 2px solid var(--accent); font-weight: bold; }
+    .tab-content { display: none; background: var(--card-bg); padding: 20px; border-radius: 8px; border: 1px solid var(--border); }
+    .tab-content.active { display: block; }
+
+    .stat-badge { display: inline-block; background: #334155; padding: 6px 12px; border-radius: 20px; margin: 5px; font-weight: bold; color: #38bdf8; }
+    .back-btn { margin-bottom: 20px; background: #334155; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div style="display:flex; align-items:center; gap:15px;">
+      <button class="btn" onclick="toggleDrawer()">☰ תפריט יצורים</button>
+      <div class="header-title" onclick="showHome()" style="cursor:pointer;">ענקי הפרהיסטוריה</div>
+    </div>
+    <div class="header-controls">
+      <button class="btn" onclick="toggleViewMode()" id="viewModeBtn">תצוגה: כרטיסיות ברצף</button>
+      <button class="btn" onclick="toggleLatin()" id="latinBtn">מונחים בלטינית: מוצג</button>
+    </div>
+  </header>
+
+  <div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer()"></div>
+  <div class="drawer" id="drawer">
+    <div class="drawer-header">
+      <h2>תפריט יצורים</h2>
+      <button class="drawer-close" onclick="toggleDrawer()">&times;</button>
+    </div>
+    
+    <div class="category-title">🌍 ענקי היבשה</div>
+    <a href="#" class="animal-link" onclick="openAnimal('palaeoloxodon')">פלאולוקסודון נמדיקוס <span class="latin-term">(Palaeoloxodon namadicus)</span></a>
+    <a href="#" class="animal-link" onclick="openAnimal('paraceratherium')">פרצרתריום <span class="latin-term">(Paraceratherium)</span></a>
+    <a href="#" class="animal-link" onclick="openAnimal('megatherium')">מגתריום <span class="latin-term">(Megatherium americanum)</span></a>
+    <a href="#" class="animal-link" onclick="openAnimal('titanoboa')">טיטאנובואה <span class="latin-term">(Titanoboa cerrejonensis)</span></a>
+
+    <div class="category-title">🌊 ענקי הים והאוקיינוסים</div>
+    <a href="#" class="animal-link" onclick="openAnimal('megalodon')">מגלודון <span class="latin-term">(Otodus megalodon)</span></a>
+    <a href="#" class="animal-link" onclick="openAnimal('livyatan')">לווייתן מלוויל <span class="latin-term">(Livyatan melvillei)</span></a>
+    <a href="#" class="animal-link" onclick="openAnimal('perucetus')">פרוצטוס קולוסוס <span class="latin-term">(Perucetus colossus)</span></a>
+
+    <div class="category-title">🦅 ענקי האוויר והשמיים</div>
+    <a href="#" class="animal-link" onclick="openAnimal('argentavis')">ארגנטוויס <span class="latin-term">(Argentavis magnificens)</span></a>
+    <a href="#" class="animal-link" onclick="openAnimal('pelagornis')">פלגורניס סנדרסי <span class="latin-term">(Pelagornis sandersi)</span></a>
+  </div>
+
+  <div class="container">
+    <div id="homeView" class="intro-card">
+      <h1>עידן הקנוזואיקון והתפתחות יצורי הענק</h1>
+      <p>לפני כ-66 מיליון שנים, התרחשה הכחדת המונים קטסטרופלית בעקבות פגיעת אסטרואיד כדור הארץ, אירוע שהביא לקצה של שושלת הדינוזאורים הלא-עופיים. הכחדתם של טורפי-העל והצמחונים הענקיים ששלטו בכדור הארץ במשך עשרות מיליוני שנים הותירה נישות אקולוגיות רבות ריקות לחלוטין.</p>
+      <p>עידן הקנוזואיקון ("עידן החיים החדשים") החל מיד לאחר ההכחדה הגדולה. היונקים, העופות והזוחלים ששרדו – אשר עד אז היו ברובם יצורים קטנים ונחבאים אל הכלים – החלו לעבור תהליך מואץ של התמיינות אבולוציונית וסתגלתנות. בהיעדר תחרות מצד הדינוזאורים, התפתח תהליך שנקרא ענקות יונקים וזוחלים (Gigantism).</p>
+      <p>במהלך עשרות מיליוני השנים הבאות, התפתחו ביבשה, בים ובאוויר יצורי ענק חסרי תקדים בממדיהם. ביבשה שגשגו פילים ענקיים (גובה כתפיים 4.5–5.2 מ', משקל עד 22 טונות), קרנפי ענק ללא קרן (גובה 4.8 מ', אורך 7.4 מ', משקל 15–20 טונות), עצלני קרקע (אורך 6 מ', משקל 4 טונות) ונחשי ענק (אורך 12.8–14.3 מ', משקל מעל טונה); באוקיינוסים שלטו כרישי ענק (אורך 15–20 מ', משקל 30–60 טונות), לווייתנים טורפים בעלי שיניים עצומות (אורך 13.5–17.5 מ', משקל 57 טונות, שיניים 36 ס"מ) ולווייתני ענק כבדים (אורך 17–20 מ', משקל 60–114 טונות); ובשמיים דאו עופות ענק (מוטת כנפיים 5.1–6.5 מ' ו-6.1–7.4 מ').</p>
+      <p style="margin-top:20px; font-weight:bold; color:var(--accent);">לחצו על "תפריט יצורים" בתפריט העליון כדי לחקור את 9 יצורי הענק המרשימים ביותר של עידן הקנוזואיקון!</p>
+    </div>
+
+    <div id="animalViewContainer" class="animal-view">
+      <button class="back-btn" onclick="showHome()">← חזרה למבוא הראשי</button>
+      <div id="animalContent"></div>
+    </div>
+  </div>
+
+  <script>
+    let isTabsMode = false;
+    let showLatin = true;
+    let currentAnimalId = null;
+
+    const animalsData = {
+      palaeoloxodon: {
+        name: "פלאולוקסודון נמדיקוס",
+        latin: "Palaeoloxodon namadicus",
+        category: "ענקי היבשה",
+        stats: ["גובה כתפיים: 4.5–5.2 מטרים", "משקל: עד 22 טונות"],
+        overview: "פלאולוקסודון נמדיקוס הוא ככל הנראה יונק היבשה הגדול ביותר שחי אי פעם. הוא היה פיל ישר-חטים שחי ברחבי אסיה בתקופת הפלייסטוקן.",
+        habitat: "ערבות ויערות פתוחים ברחבי אסיה (בעיקר בהודו ודרום אסיה).",
+        details: "בעל חטים ארוכים וישרים במיוחד ומבנה גולגולת חזק שתמך בשרירי צוואר עצומים. משקלו (עד 22 טונות) גבר אף על זה של הפרצרתריום."
+      },
+      paraceratherium: {
+        name: "פרצרתריום",
+        latin: "Paraceratherium",
+        category: "ענקי היבשה",
+        stats: ["גובה כתפיים: 4.8 מטרים", "אורך: 7.4 מטרים", "משקל: 15–20 טונות"],
+        overview: "פרצרתריום הוא קרנף ענק חסר קרן מוקדם, נחשב לאחד היונקים היבשתיים הגדולים בהיסטוריה.",
+        habitat: "יערות וערבות אירואסיה בתקופת האוליגוקן.",
+        details: "צווארו הארוך אפשר לו לתלוש עלים מצמרות עצים גבוהים, בדומה לג'ירפה מודרנית אך בממדים עצומים בהרבה."
+      },
+      megatherium: {
+        name: "מגתריום",
+        latin: "Megatherium americanum",
+        category: "ענקי היבשה",
+        stats: ["אורך: 6 מטרים", "משקל: 4 טונות"],
+        overview: "עצלן קרקע ענק שהיה אחד היונקים הגדולים ביותר בדרום אמריקה בתקופת הפלייסטוקן.",
+        habitat: "ערבות ויערות בדרום אמריקה.",
+        details: "נעזר בטפרים עצומים כדי לתלוש ענפים ולעמוד על רגליו האחוריות. עורו היה משובץ עצמיות קטנות שהגנו עליו מפני טורפים."
+      },
+      titanoboa: {
+        name: "טיטאנובואה",
+        latin: "Titanoboa cerrejonensis",
+        category: "ענקי היבשה",
+        stats: ["אורך: 12.8–14.3 מטרים", "משקל: מעל 1 טונה"],
+        overview: "הנחש הגדול ביותר שהתגלה אי פעם. חי לאחר הכחדת הדינוזאורים בתקופת הפלאוקן.",
+        habitat: "ביצות ויערות גשם טרופיים חמים בקולומביה של היום.",
+        details: "נחש חנק ענק שחי בסביבה חמה מאוד (30-34 מעלות צלזיוס), מה שאפשר לחילוף החומרים שלו לתמוך בממדי ענק כאלה."
+      },
+      megalodon: {
+        name: "מגלודון",
+        latin: "Otodus megalodon",
+        category: "ענקי הים והאוקיינוסים",
+        stats: ["אורך: 15–20 מטרים", "משקל: 30–60 טונות"],
+        overview: "כריש הענק הפרהיסטורי שהיה טורף-העל החזק ביותר באוקיינוסים בתקופות המיוקן והפליוקן.",
+        habitat: "אוקיינוסים ימיים חמים וממוזגים ברחבי העולם.",
+        details: "בעל נשיכה בעוצמה האדירה ביותר בהיסטוריה. ניזון מלווייתנים ענקיים ויונקים ימיים אחרים."
+      },
+      livyatan: {
+        name: "לווייתן מלוויל",
+        latin: "Livyatan melvillei",
+        category: "ענקי הים והאוקיינוסים",
+        stats: ["אורך: 13.5–17.5 מטרים", "משקל: 57 טונות", "שיניים: באורך 36 ס\"מ"],
+        overview: "לווייתן ראשתן טורף פרהיסטורי שהתחרה במגלודון על שליטה באוקיינוסים.",
+        habitat: "האוקיינוס השקט (שרידים נמצאו בפרו).",
+        details: "בעל השיניים האוכלות הגדולות ביותר של בעל חיים כלשהו (למעט חטים). שמו ניתן לו על שם הסופר הרמן מלוויל."
+      },
+      perucetus: {
+        name: "פרוצטוס קולוסוס",
+        latin: "Perucetus colossus",
+        category: "ענקי הים והאוקיינוסים",
+        stats: ["אורך: 17–20 מטרים", "משקל: 60–114 טונות"],
+        overview: "לווייתן קדום מאובן בעל עצמות דחוסות וכבדות במיוחד, שעשוי להתחרות בלווייתן הכחול כמסת גוף כבדה ביותר.",
+        habitat: "מי חופים רדודים באזור פרו בתקופת האאוקן.",
+        details: "העצמות שלו היו כבדות ופחוסות במיוחד (pachyosteosclerosis) לסיוע בציפה בצלילה במים רדודים."
+      },
+      argentavis: {
+        name: "ארגנטוויס",
+        latin: "Argentavis magnificens",
+        category: "ענקי האוויר והשמיים",
+        stats: ["מוטת כנפיים: 5.1–6.5 מטרים", "משקל: 70–72 ק\"ג"],
+        overview: "אחד העופות העפים הגדולים בהיסטוריה של כדור הארץ, ממשפחת הטרטורניסים.",
+        habitat: "הערבות הפתוחות של ארגנטינה בתקופת המיוקן.",
+        details: "ניצל זרמי אוויר חמים (תרמיקות) כדי לדאות במרחבים הענקיים ולצוד יונקים קטנים ופגרים."
+      },
+      pelagornis: {
+        name: "פלגורניס סנדרסי",
+        latin: "Pelagornis sandersi",
+        category: "ענקי האוויר והשמיים",
+        stats: ["מוטת כנפיים: 6.1–7.4 מטרים", "משקל: 22–40 ק\"ג"],
+        overview: "עוף ימי נכחד בעל מוטת כנפיים אדירה ובליטות דמויות שיניים במקורו.",
+        habitat: "אוקיינוסים וחופים ברחבי העולם בתקופת האוליגוקן.",
+        details: "בליטות העצם במקור הצר שלו סייעו לו לתפוס דגים חלקלקים וסרטנים תוך כדי דאייה מעל פני המים."
+      }
+    };
+
+    function toggleDrawer() {
+      document.getElementById('drawer').classList.toggle('active');
+      document.getElementById('drawerOverlay').classList.toggle('active');
+    }
+
+    function showHome() {
+      document.getElementById('homeView').style.display = 'block';
+      document.getElementById('animalViewContainer').classList.remove('active');
+      currentAnimalId = null;
+    }
+
+    function openAnimal(id) {
+      currentAnimalId = id;
+      document.getElementById('homeView').style.display = 'none';
+      document.getElementById('animalViewContainer').classList.add('active');
+      toggleDrawer();
+      renderAnimal();
+    }
+
+    function toggleViewMode() {
+      isTabsMode = !isTabsMode;
+      document.getElementById('viewModeBtn').innerText = isTabsMode ? "תצוגה: בלשוניות (Tabs)" : "תצוגה: כרטיסיות ברצף";
+      if (currentAnimalId) renderAnimal();
+    }
+
+    function toggleLatin() {
+      showLatin = !showLatin;
+      document.getElementById('latinBtn').innerText = showLatin ? "מונחים בלטינית: מוצג" : "מונחים בלטינית: מוסתר";
+      if (showLatin) {
+        document.body.classList.remove('latin-hidden');
+      } else {
+        document.body.classList.add('latin-hidden');
+      }
+    }
+
+    function renderAnimal() {
+      if (!currentAnimalId) return;
+      const data = animalsData[currentAnimalId];
+      const container = document.getElementById('animalContent');
+
+      let statsHtml = data.stats.map(s => `<span class="stat-badge">${s}</span>`).join('');
+
+      if (!isTabsMode) {
+        container.className = "continuous-view";
+        container.innerHTML = `
+          <h1 class="view-title">${data.name}</h1>
+          <span class="latin-name">${data.latin}</span>
+          <div style="margin-bottom:15px;">${statsHtml}</div>
+          
+          <div class="card">
+            <h3>📋 סקירה כללית</h3>
+            <p>${data.overview}</p>
+          </div>
+          <div class="card">
+            <h3>🏞️ סביבת מחיה ואזור</h3>
+            <p>${data.habitat}</p>
+          </div>
+          <div class="card">
+            <h3>🔍 מאפיינים ייחודיים ואנטומיה</h3>
+            <p>${data.details}</p>
+          </div>
+        `;
+      } else {
+        container.className = "tabs-view";
+        container.innerHTML = `
+          <h1 class="view-title">${data.name}</h1>
+          <span class="latin-name">${data.latin}</span>
+          <div style="margin-bottom:15px;">${statsHtml}</div>
+
+          <div class="tabs-nav">
+            <button class="tab-btn active" onclick="switchTab(event, 'tab-overview')">סקירה כללית</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tab-habitat')">סביבת מחיה</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tab-details')">מאפיינים ייחודיים</button>
+          </div>
+
+          <div id="tab-overview" class="tab-content active">
+            <h3>📋 סקירה כללית</h3>
+            <p>${data.overview}</p>
+          </div>
+          <div id="tab-habitat" class="tab-content">
+            <h3>🏞️ סביבת מחיה ואזור</h3>
+            <p>${data.habitat}</p>
+          </div>
+          <div id="tab-details" class="tab-content">
+            <h3>🔍 מאפיינים ייחודיים ואנטומיה</h3>
+            <p>${data.details}</p>
+          </div>
+        `;
+      }
+    }
+
+    function switchTab(e, tabId) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      e.target.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    }
+  </script>
+</body>
+</html>
