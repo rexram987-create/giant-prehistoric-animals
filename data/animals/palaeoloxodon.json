@@ -26,5 +26,11 @@
       "title": "Larramendi (2016) — Shoulder height, body mass and shape of proboscideans",
       "url": "https://www.app.pan.pl/article/item/app001362014.html"
     }
-  ]
+  ],
+  "image": {
+    "src": "./images/animals/palaeoloxodon.webp",
+    "alt": "שחזור פלאולוקסודון נמדיקוס בעל חטים ארוכים וישרים במישור פתוח",
+    "width": 1600,
+    "height": 900
+  }
 }

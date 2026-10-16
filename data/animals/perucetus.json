@@ -22,5 +22,12 @@
       "title": "Motani & Pyenson 2024 — PeerJ",
       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10909350/"
     }
-  ]
+  ],
+  "image": {
+    "src": "./images/animals/perucetus.webp",
+    "alt": "המחשה משוערת של פרוצטוס בעל גוף כבד ומוארך מעל קרקעית ים רדוד",
+    "width": 1600,
+    "height": 900,
+    "note": "לא נמצאה גולגולת; צורת הראש, הרקמות הרכות ומבנה הגוף המלא בתמונה הם פרשנות משוערת."
+  }
 }

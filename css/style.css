@@ -106,3 +106,11 @@ button,summary{min-height:44px}
 .site-tools summary{cursor:pointer;padding:8px 0;color:#fbbf24}
 .site-tools p{max-width:75ch}
 @media(max-width:600px){.notice,.site-tools{padding-left:12px;padding-right:12px}.grid-3,.grid-4{grid-template-columns:minmax(0,1fr)}}
+
+/* Full 16:9 reconstructions: preserve the complete animal at every width. */
+.animal-figure{margin:20px 0 16px;max-width:100%;min-width:0}
+.animal-figure>a{display:block;border-radius:14px;overflow:hidden;background:#0b0f17;line-height:0}
+.animal-figure img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain}
+.animal-figure figcaption{font-size:13px;line-height:1.65;color:#cbd5e1;margin-top:10px}
+.image-hint{display:block;color:#fbbf24;margin-top:4px}
+@media(max-width:600px){.animal-figure{margin-top:16px}.animal-figure>a{border-radius:10px}}

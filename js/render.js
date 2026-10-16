@@ -1,3 +1,14 @@
+function renderAnimalImage(animal){
+  if (!animal.image) return '';
+  const image = animal.image;
+  return `<figure class="animal-figure">
+    <a href="${escapeText(image.src)}" target="_blank" rel="noopener" aria-label="${escapeText('פתח תמונה מלאה של ' + animal.nameHe + ' בחלון חדש')}">
+      <img src="${escapeText(image.src)}" alt="${escapeText(image.alt)}" width="1600" height="900" decoding="async">
+    </a>
+    <figcaption>שחזור משוער שנוצר בבינה מלאכותית. צבעים, רקמות רכות ופרטים מסוימים אינם ידועים בוודאות.${image.note ? ' ' + escapeText(image.note) : ''} <span class="image-hint">לחצו על התמונה לפתיחה בגודל מלא.</span></figcaption>
+  </figure>`;
+}
+
 function renderSources(sources = []){
   return sources.filter(src => /^https:\/\//.test(src.url)).map(src => `<a href="${escapeText(src.url)}" target="_blank" rel="noopener noreferrer">${escapeText(src.title || 'מקור לקריאה נוספת')} <span class="sr-only">(נפתח בחלון חדש; נדרש אינטרנט)</span>↗</a>`).join('<br>');
 }
@@ -78,6 +89,8 @@ function renderMain(){
         <span class="badge">אזור מחיה: ${a.habitatHe}</span>
       </div>
       <p style="font-size:17px;color:#cbd5e1;margin:10px 0 0">${a.subHe}</p>
+
+      ${renderAnimalImage(a)}
 
       <div class="hero-visual">
         <div style="font-size:64px;line-height:1">${a.icon}</div>

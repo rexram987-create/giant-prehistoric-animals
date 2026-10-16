@@ -22,5 +22,11 @@
       "title": "Lambert et al. 2017 — Zoological Journal of the Linnean Society",
       "url": "https://academic.oup.com/zoolinnean/article-abstract/179/2/404/2957727"
     }
-  ]
+  ],
+  "image": {
+    "src": "./images/animals/livyatan.webp",
+    "alt": "שחזור לווייתן מלוויל בעל ראש גדול ושיניים בשתי הלסתות",
+    "width": 1600,
+    "height": 900
+  }
 }

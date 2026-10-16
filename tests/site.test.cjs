@@ -41,3 +41,15 @@ function pwaHarness(controlled){
 test('every already-controlled tab reloads after a service worker update',()=>{const p=pwaHarness(true);p.handlers.controllerchange();assert.equal(p.reloads,1)});
 test('first-time offline activation does not interrupt reading with a reload',()=>{const p=pwaHarness(false);p.serviceWorker.controller={};p.handlers.controllerchange();assert.equal(p.reloads,0);assert.match(p.get('offlineStatus').textContent,/נשמר/)});
 test('closed drawer is removed from layout, not just translated offscreen',()=>{const a=app();a.run('toggleDrawer(true)');assert.equal(a.get('drawer').hidden,false);a.run('toggleDrawer(false)');assert.equal(a.get('drawer').hidden,true)});
+test('every animal page renders its local reconstruction with alt text and disclosure',()=>{
+ const a=app();vm.runInContext(fs.readFileSync('js/render.js','utf8'),a.context);
+ for(const id of JSON.parse(fs.readFileSync('data/animals/index.json'))){
+  a.context.record=JSON.parse(fs.readFileSync(`data/animals/${id}.json`));
+  a.run("ANIMALS=[record];state.view='animal';state.animalId=record.id;state.tab='overview';renderMain()");
+  const html=a.get('mainContent').innerHTML;
+  assert.ok(html.includes(`./images/animals/${id}.webp`),id+' image displayed');
+  assert.match(html,/<img[^>]+alt="[^"]+"/);
+  assert.match(html,/שחזור משוער/);
+ }
+});
+test('all nine images remain available offline',async()=>{const w=workerHarness();await w.install();for(const id of JSON.parse(fs.readFileSync('data/animals/index.json')))assert.equal(await w.request(`images/animals/${id}.webp`),`cached:./images/animals/${id}.webp`)});
