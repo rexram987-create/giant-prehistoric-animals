@@ -22,5 +22,11 @@
       "title": "Smithsonian (2009) — World’s Largest Snake Discovered in Fossilized Rainforest",
       "url": "https://www.si.edu/newsdesk/releases/world-s-largest-snake-discovered-fossilized-rainforest"
     }
-  ]
+  ],
+  "image": {
+    "src": "./images/animals/titanoboa.webp",
+    "alt": "שחזור טיטאנובואה, נחש עבה וארוך על גדת נהר טרופי",
+    "width": 1600,
+    "height": 900
+  }
 }

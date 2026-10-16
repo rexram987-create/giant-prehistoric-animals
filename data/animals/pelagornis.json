@@ -22,5 +22,11 @@
       "title": "Ksepka 2014 — PNAS",
       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4115518/"
     }
-  ]
+  ],
+  "image": {
+    "src": "./images/animals/pelagornis.webp",
+    "alt": "שחזור פלגורניס סנדרסי בעל כנפיים ארוכות וצרות ומקור ארוך מעל הים",
+    "width": 1600,
+    "height": 900
+  }
 }

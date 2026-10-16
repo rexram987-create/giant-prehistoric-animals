@@ -22,5 +22,11 @@
       "title": "Chatterjee, Templin & Campbell (2007) — The aerodynamics of Argentavis",
       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1906724/"
     }
-  ]
+  ],
+  "image": {
+    "src": "./images/animals/argentavis.webp",
+    "alt": "שחזור ארגנטוויס דואה בכנפיים רחבות ופרושות מעל נוף פתוח",
+    "width": 1600,
+    "height": 900
+  }
 }

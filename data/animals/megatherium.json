@@ -22,5 +22,11 @@
       "title": "מוזיאון הטבע בלונדון — What was Megatherium?",
       "url": "https://www.nhm.ac.uk/discover/what-was-megatherium.html"
     }
-  ]
+  ],
+  "image": {
+    "src": "./images/animals/megatherium.webp",
+    "alt": "שחזור עצלן הקרקע הענק מגתריום, בעל פרווה חומה, טפרים וזנב עבה",
+    "width": 1600,
+    "height": 900
+  }
 }

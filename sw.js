@@ -1,11 +1,20 @@
 /* Bump this version whenever a precached file changes. */
-const CACHE_NAME = 'prehistoric-giants-v3-20261016';
+const CACHE_NAME = 'prehistoric-giants-v4-images-20261016';
 const CACHE_PREFIX = 'prehistoric-giants-';
 const PRECACHE = [
   './', './index.html', './css/style.css',
   './js/app.js', './js/navigation.js', './js/render.js', './js/events.js', './js/pwa.js',
   './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png',
   './icons/maskable-512.png', './icons/apple-touch-icon.png',
+  './images/animals/palaeoloxodon.webp',
+  './images/animals/paraceratherium.webp',
+  './images/animals/megatherium.webp',
+  './images/animals/titanoboa.webp',
+  './images/animals/megalodon.webp',
+  './images/animals/livyatan.webp',
+  './images/animals/perucetus.webp',
+  './images/animals/argentavis.webp',
+  './images/animals/pelagornis.webp',
   './data/habitats.json', './data/animals/index.json',
   './data/animals/palaeoloxodon.json', './data/animals/paraceratherium.json',
   './data/animals/megatherium.json', './data/animals/titanoboa.json',

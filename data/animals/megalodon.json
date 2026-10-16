@@ -22,5 +22,11 @@
       "title": "מחקר ב־Palaeontologia Electronica (2026) — חוליות מגלודון מדנמרק",
       "url": "https://palaeo-electronica.org/content/2026/5872-otodus-megalodon-vertebrae-from-denmark"
     }
-  ]
+  ],
+  "image": {
+    "src": "./images/animals/megalodon.webp",
+    "alt": "שחזור כריש מגלודון השוחה במים כחולים, כל גופו וסנפיריו נראים",
+    "width": 1600,
+    "height": 900
+  }
 }

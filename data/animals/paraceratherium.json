@@ -22,5 +22,11 @@
       "title": "Deng et al. 2021 — Communications Biology",
       "url": "https://www.nature.com/articles/s42003-021-02170-6"
     }
-  ]
+  ],
+  "image": {
+    "src": "./images/animals/paraceratherium.webp",
+    "alt": "שחזור פרצרתריום חסר קרניים, בעל צוואר ורגליים ארוכים, במישור מיוער בדלילות",
+    "width": 1600,
+    "height": 900
+  }
 }
