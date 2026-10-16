@@ -39,3 +39,13 @@ main{max-width:1000px;width:100%;margin:0 auto;padding:32px 20px;flex:1}
 .hero-visual{background:linear-gradient(135deg,#1e293b,#0f172a);border:1px solid #334155;border-radius:16px;padding:24px;margin:16px 0;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px}
 .scale-bar-wrap{background:#090d16;border:1px solid #1f2937;border-radius:12px;padding:14px;min-width:240px;flex:1}
 footer{background:#111827;border-top:1px solid #1f2937;padding:20px;text-align:center;font-size:13px;color:#94a3b8;margin-top:auto}
+
+/* Accessible mobile navigation */
+.drawer{visibility:hidden;pointer-events:none;transform:translateX(105%);width:min(360px,100vw);max-width:100vw;overflow:hidden}
+.drawer.open{visibility:visible;pointer-events:auto;transform:translateX(0)}
+.drawer-head{gap:12px}.drawer-head>div{min-width:0}.drawer-head #closeMenuBtn{flex-shrink:0}
+.nav-item>div{min-width:0;flex:1;overflow-wrap:anywhere}.nav-item{gap:10px;align-items:center}.nav-item>span{flex-shrink:0}
+.drawer .latin{direction:ltr;unicode-bidi:isolate;overflow-wrap:anywhere}
+body.drawer-open{overflow:hidden}
+@media(max-width:480px){.drawer{width:100vw}.drawer-body{padding:12px}.cat-head{font-size:14px}.nav-item{font-size:14px}}
+@media(prefers-reduced-motion:reduce){.drawer{transition:none}}
