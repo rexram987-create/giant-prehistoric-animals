@@ -49,3 +49,30 @@ footer{background:#111827;border-top:1px solid #1f2937;padding:20px;text-align:c
 body.drawer-open{overflow:hidden}
 @media(max-width:480px){.drawer{width:100vw}.drawer-body{padding:12px}.cat-head{font-size:14px}.nav-item{font-size:14px}}
 @media(prefers-reduced-motion:reduce){.drawer{transition:none}}
+
+/* Keep the document within the mobile viewport */
+html{width:100%;max-width:100%;overflow-x:clip}
+body{width:100%;max-width:100%;min-width:0;overflow-x:clip}
+.header-inner,.brand-group,.header-inner>div,main,.card,.hero-visual,.stat-box{min-width:0}
+.brand-group>div{min-width:0}
+.brand-title,.brand-sub,.card h2,.card p{overflow-wrap:break-word}
+.header-inner{width:100%}
+.drawer{right:0;left:auto;box-sizing:border-box;max-width:100vw}
+.drawer.open{transform:translateX(0)}
+@media(max-width:600px){
+ .site-header{padding:14px 12px}
+ .header-inner{display:flex;flex-direction:column;align-items:stretch;gap:12px}
+ .brand-group{display:flex;flex-direction:column;align-items:stretch;gap:12px}
+ .brand-title{font-size:clamp(19px,5vw,24px);line-height:1.3}
+ .brand-sub{font-size:13px}
+ .header-inner>div:last-child{display:flex;gap:8px;flex-wrap:wrap}
+ .header-inner>div:last-child button{flex:1 1 145px;white-space:normal}
+ main{padding:16px 12px}
+ .card{padding:16px;border-radius:14px}
+ .hero-visual{padding:12px}
+ .scale-bar-wrap{min-width:0;width:100%}
+ .drawer{width:min(360px,100vw);height:100dvh}
+ .drawer-head{padding:14px}
+ .drawer-body{padding:12px}
+ .nav-item{padding:10px 8px}
+}
