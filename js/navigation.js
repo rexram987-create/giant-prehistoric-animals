@@ -1,6 +1,12 @@
 function toggleDrawer(open){
   drawerEl.classList.toggle('open', open);
   backdropEl.classList.toggle('open', open);
+  drawerEl.setAttribute('aria-hidden', String(!open));
+  drawerEl.inert = !open;
+  document.body.classList.toggle('drawer-open', open);
+  document.getElementById('openMenuBtn').setAttribute('aria-expanded', String(open));
+  if (open) document.getElementById('closeMenuBtn').focus();
+  else document.getElementById('openMenuBtn').focus();
 }
 
 function renderDrawer(){
