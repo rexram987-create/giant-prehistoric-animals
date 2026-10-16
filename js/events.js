@@ -8,11 +8,12 @@ document.addEventListener('keydown', event => { handleDrawerKeydown(event); hand
 window.addEventListener('hashchange', () => applyRoute());
 document.getElementById('toggleModeBtn').onclick = () => {
   state.separated = !state.separated;
-  savePreferences(); syncPreferences(); renderMain();
+  stopNarration(); savePreferences(); syncPreferences(); renderMain();
 };
 document.getElementById('toggleLatinBtn').onclick = () => {
   state.showLatin = !state.showLatin;
   savePreferences(); syncPreferences();
 };
+initializeNarration();
 syncPreferences();
 initializeData();

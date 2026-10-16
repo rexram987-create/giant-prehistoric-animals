@@ -1,9 +1,9 @@
 /* Bump this version whenever a precached file changes. */
-const CACHE_NAME = 'prehistoric-giants-v4-images-20261016';
+const CACHE_NAME = 'prehistoric-giants-v5-narration-20261016';
 const CACHE_PREFIX = 'prehistoric-giants-';
 const PRECACHE = [
   './', './index.html', './css/style.css',
-  './js/app.js', './js/navigation.js', './js/render.js', './js/events.js', './js/pwa.js',
+  './js/app.js', './js/navigation.js', './js/render.js', './js/narration.js', './js/events.js', './js/pwa.js',
   './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png',
   './icons/maskable-512.png', './icons/apple-touch-icon.png',
   './images/animals/palaeoloxodon.webp',

@@ -90,6 +90,8 @@ function renderMain(){
       </div>
       <p style="font-size:17px;color:#cbd5e1;margin:10px 0 0">${a.subHe}</p>
 
+      ${renderNarrationControls()}
+
       ${renderAnimalImage(a)}
 
       <div class="hero-visual">
@@ -122,5 +124,6 @@ function renderMain(){
       </button>
     </div>
   `;
+  syncNarrationUI();
 }
 
