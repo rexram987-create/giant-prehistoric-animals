@@ -1,5 +1,5 @@
 /* Bump this version whenever a precached file changes. */
-const CACHE_NAME = 'prehistoric-giants-v6-narration-20261016';
+const CACHE_NAME = 'prehistoric-giants-v7-seven-animals-20261107';
 const CACHE_PREFIX = 'prehistoric-giants-';
 const PRECACHE = [
   './', './index.html', './css/style.css',
@@ -19,7 +19,8 @@ const PRECACHE = [
   './data/animals/palaeoloxodon.json', './data/animals/paraceratherium.json',
   './data/animals/megatherium.json', './data/animals/titanoboa.json',
   './data/animals/megalodon.json', './data/animals/livyatan.json',
-  './data/animals/perucetus.json', './data/animals/argentavis.json', './data/animals/pelagornis.json'
+  './data/animals/perucetus.json', './data/animals/argentavis.json', './data/animals/pelagornis.json',
+  './data/animals/ornimegalonyx.json', './data/animals/cervalces.json', './data/animals/castoroides.json', './data/animals/doedicurus.json', './data/animals/macrauchenia.json', './data/animals/toxodon.json', './data/animals/eremotherium.json'
 ];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(PRECACHE)));
