@@ -1,5 +1,5 @@
 /* Bump this version whenever a precached file changes. */
-const CACHE_NAME = 'prehistoric-giants-v8-macrauchenia-research-20261108';
+const CACHE_NAME = 'prehistoric-giants-v9-macrauchenia-image-20261108';
 const CACHE_PREFIX = 'prehistoric-giants-';
 const PRECACHE = [
   './', './index.html', './css/style.css',
@@ -15,6 +15,7 @@ const PRECACHE = [
   './images/animals/perucetus.webp',
   './images/animals/argentavis.webp',
   './images/animals/pelagornis.webp',
+  './images/animals/macrauchenia.webp',
   './data/habitats.json', './data/animals/index.json',
   './data/animals/palaeoloxodon.json', './data/animals/paraceratherium.json',
   './data/animals/megatherium.json', './data/animals/titanoboa.json',

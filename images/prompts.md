@@ -37,3 +37,7 @@ One gigantic teratorn soaring over a late Miocene Argentine open landscape and d
 ## Pelagornis sandersi
 
 One giant pseudotoothed seabird gliding above an Oligocene subtropical coastal ocean. Extremely long narrow wings with slender pointed tips, long narrow tapered straight beak with small bone tooth-like projections, long low slender head and elegant narrow neck, slim seabird body, short tail and tucked legs. Pale cream-gray underside and muted gray-brown upper wings, speculative colors. Slightly open beak. Not a raptor or pelican; no eagle hook, throat pouch, pterosaur membranes or fantasy teeth. Both extended wings fully inside frame in a distant oblique aerial view.
+
+## Macrauchenia patachonica — 2026-11-08
+
+Created with the built-in image generation tool. Separate photorealistic 16:9 reconstruction: one adult in three-quarter side view, entire animal visible in open South American Pleistocene grassland. Heavy body, elongated neck and skull, long strong legs, three hoofed toes per foot, small ears, no hump or antlers. Restrained enlarged fleshy muzzle and mobile upper lip, no long dangling trunk. Muzzle, muted brown-gray coat and scenery explicitly speculative. Natural daylight; no people, other animals, writing, watermark or collage. Original PNG converted to 1600×900 WebP for the website.
