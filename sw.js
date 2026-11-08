@@ -1,5 +1,5 @@
 /* Bump this version whenever a precached file changes. */
-const CACHE_NAME = 'prehistoric-giants-v7-seven-animals-20261107';
+const CACHE_NAME = 'prehistoric-giants-v8-macrauchenia-research-20261108';
 const CACHE_PREFIX = 'prehistoric-giants-';
 const PRECACHE = [
   './', './index.html', './css/style.css',
